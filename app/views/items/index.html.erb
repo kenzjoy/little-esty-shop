@@ -1,13 +1,14 @@
 <h1>Welcome To <%= @merchant.name %></h1>
 
-
 <%= link_to "Create New Item", "/merchants/#{@merchant.id}/items/new", method: :get %>
 
-<h2>--- Top 5 Items ---</h2>
-  <% @merchant_top_items.each do |item, total_revenue|%>
-    <p> <%= "#{item}: #{total_revenue}"%> </p>
-  <%end%>
-  
+<div id="top_items">
+  <h2>--- Top 5 Items ---</h2>
+    <% @merchant_top_items.each do |item, total_revenue|%>
+      <p> <%= link_to item[1], merchant_item_path(@merchant, item[0])%>: <%= "#{total_revenue}"%> </p>
+    <%end%>
+</div>
+
 <div id="enabled">
 <h2>--- Enabled Items ---</h2>
   <% @merchant_items.each do |item| %>
