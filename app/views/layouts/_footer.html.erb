@@ -1,20 +1,25 @@
-<div class="repo">
-  <h4> Repo: <%= name %></h4>
-</div>
-<div class="group">
+  <div class="repo">
+  <% if name.present? %>
+    <h4> Repo: <%= name %></h4>
+  </div>
+  <div class="group">
   <h4> Group Members: </h4>
+<% elsif group.class != Hash && group != nil%>
   <% group.each do |member| %>
     <p> <%= member %> </p>
   <% end %>
-</div>
-<div class="commits">
+  </div>
+  <div class="commits">
   <h4> Commits by Group Member: </h4>
+<% elsif group.class != Hash && group != nil && contributions != {} && contributions != nil %>
   <% contributions.each do |member, commits| %>
     <% if group.include?(member) %>
-    <p> Member: <%= member %>, Commits: <%= commits %> </p>
+      <p> Member: <%= member %>, Commits: <%= commits %> </p>
     <% end %>
   <% end %>
-</div>
-<div class="pull">
-  <h4> Number of Pull Requests: <%=pull_requests %></h4>
-</div>
+  </div>
+  <div class="pull">
+<% elsif pull_requests.present? %>
+  <h4> Number of Pull Requests: <%= pull_requests %></h4>
+  </div>
+<% end %>
